@@ -25,7 +25,7 @@ Constraints:
 
 import heapq
 class Solution:
-    def minMeetingRooms1(self, intervals: List[List[int]]) -> int:
+    def minMeetingRooms_heap(self, intervals: List[List[int]]) -> int:
         max1 = 1
         intervals.sort()
         intervals = [[j,i] for i, j in intervals]
@@ -37,7 +37,7 @@ class Solution:
             max1 = max(max1, len(min_heap))
 
         return max1
-    def minMeetingRooms2(self, intervals: List[List[int]]) -> int:
+    def minMeetingRooms_two_array(self, intervals: List[List[int]]) -> int:
         start = [i for i,j in intervals]
         end = [j for i, j in intervals]
         start.sort()
@@ -56,7 +56,8 @@ class Solution:
                 ctr -= 1
         return minimum
     
-    def minMeetingRooms(self, intervals: List[List[int]]) -> int:
+    #more efficiency 
+    def minMeetingRooms_sortarray(self, intervals: List[List[int]]) -> int:
         ctr = 0
         expand  = []
         for i, j in intervals:
