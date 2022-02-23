@@ -37,6 +37,8 @@ class Solution:
             max1 = max(max1, len(min_heap))
 
         return max1
+       
+       
     def minMeetingRooms_two_array(self, intervals: List[List[int]]) -> int:
         start = [i for i,j in intervals]
         end = [j for i, j in intervals]
@@ -56,6 +58,7 @@ class Solution:
                 ctr -= 1
         return minimum
     
+    
     #more efficiency 
     def minMeetingRooms_sortarray(self, intervals: List[List[int]]) -> int:
         ctr = 0
@@ -69,3 +72,7 @@ class Solution:
             ctr += j
             minimum = max(ctr, minimum)
         return minimum
+
+       
+       
+  
