@@ -26,17 +26,17 @@ Constraints:
 import heapq
 class Solution:
     def minMeetingRooms_heap(self, intervals: List[List[int]]) -> int:
-        max1 = 1
         intervals.sort()
-        intervals = [[j,i] for i, j in intervals]
-        min_heap = []
-        for each in intervals:
-            while min_heap and each[1] >= min_heap[0][0]:
-                heapq.heappop(min_heap)
-            heapq.heappush(min_heap, each)
-            max1 = max(max1, len(min_heap))
-
-        return max1
+        heap = []
+        rooms = 0
+        
+        for start, end in intervals:
+            while heap and heap[0][0] <= start:
+                heapq.heappop(heap)
+                
+            heapq.heappush(heap, (end,start))
+            rooms = max(len(heap), rooms)
+        return rooms
        
        
     def minMeetingRooms_two_array(self, intervals: List[List[int]]) -> int:
