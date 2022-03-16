@@ -44,16 +44,18 @@ Constraints:
 At most 104 calls will be made to add, remove, and contains.
 """
 
+
+
 class MyHashSet:
 
     def __init__(self):
-        self.hash_size = 100
+        self.hash_size = 4
         self.hash = [set() for i in range(self.hash_size) ]
         self.count = 0
         
     def resize(self):
         
-        self.hash_size = self.hash_size*100
+        self.hash_size = self.hash_size*2
         newhash =  [set() for i in range(self.hash_size) ]
         for lst in self.hash:
             for i in lst:
@@ -63,7 +65,7 @@ class MyHashSet:
         self.hash = newhash
    
     def shrink(self):
-        self.hash_size //= 100
+        self.hash_size //= 2
         newhash =  [set() for i in range(self.hash_size) ]
         for lst in self.hash:
             for i in lst:
@@ -90,7 +92,7 @@ class MyHashSet:
             if len(lst) == 0:
                 self.count -= 1
                 
-        if self.count > 100 and self.count < self.hash_size//100:
+        if self.count > 4 and self.count < self.hash_size//2:
             self.shrink()
             
     def contains(self, key: int) -> bool:
