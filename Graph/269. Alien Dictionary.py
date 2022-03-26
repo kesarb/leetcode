@@ -37,3 +37,46 @@ Constraints:
     words[i] consists of only lowercase English letters.
 
 """
+
+from collections import defaultdict
+class Solution:
+    def alienOrder(self, words: List[str]) -> str:
+        letters = set()
+        g = defaultdict(list)
+        indegree={}
+        prev = words[0]
+        letters = letters.union(set(prev))
+        for w in words:
+            n1 = len(w)
+            n2 = len(prev)
+            
+            i = 0
+            while i < (n1):
+                if i >= n2 or prev[i] != w[i]:
+                    break
+                i+=1
+            
+            letters = letters.union(set(w))
+            
+            if i != n1 and i != n2:
+                indegree[w[i]] = indegree.get(w[i], 0)+1
+                g[prev[i]].append(w[i])
+            if i == n1 and i < n2:
+                return ""
+            prev = w
+        
+        queue = []
+        for each in letters:
+            if each not in indegree:
+                queue.append(each)
+        res = ""
+        while queue:
+            w = queue.pop(0)
+            res = res+w
+            if w in g:
+                for each in g[w]:
+                    indegree[each] -= 1
+                    if indegree[each] == 0:
+                        queue.append(each)
+                        
+        return res if len(res) == len(letters) else ""
