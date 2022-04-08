@@ -51,5 +51,25 @@ def droppedRequests(requestTime):
 
     print(res)
 
+def droppedRequests1(requestTime):
+    # Write your code here
+    res = 0
+    sec_10 = 0
+    min_window = 0
+    secctr = 0
+
+    for idx, each in enumerate(requestTime):
+
+        while each > requestTime[secctr]:
+            secctr +=1
+        while each - 10 > requestTime[sec_10]:
+            sec_10+=1
+        while each - 60 > requestTime[min_window]:
+            min_window+=1
+
+        if idx-secctr + 1 > 3 or idx-sec_10 + 1 > 20 or min_window-idx+ 1 > 60:
+            res += 1
+            
+    print(res)
 droppedRequests([1, 1, 1, 1, 2, 2, 2, 3, 3, 3, 4, 4, 4, 5, 5, 5, 6, 6, 6, 11, 11, 11])
 
