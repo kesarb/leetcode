@@ -22,3 +22,18 @@ Constraints:
 1 <= nums.length <= 100
 0 <= nums[i] <= 109
 """
+class Solution:
+    def largestNumber(self, nums: List[int]) -> str:
+        @cmp_to_key
+        def cmp (a,b):
+            if int(str(a)+str(b)) > int(str(b)+str(a)):
+                return -1
+            else:
+                return 0
+                
+        nums.sort(key=cmp)
+        num = list(map(str, nums))
+        y = "".join([str(i) for i in nums]).lstrip('0')
+        if not y:
+            y = "0"
+        return y
