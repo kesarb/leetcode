@@ -83,13 +83,7 @@ class Solution:
             if r.right:
                 return right_boundary(r.right)
             right_boundary(r.left)
-            
-        res = []
-        if not root.left and not root.right:
-            return [root.val]
-        left_boundary(root.left)
-        rows = set()
-        right_boundary(root.right)
+       
         #leaf Nodes:
         def leaf_nodes(r):
             if not r:
@@ -99,10 +93,19 @@ class Solution:
                 return
             leaf_nodes(r.left)
             leaf_nodes(r.right)
-            
+         
+        res = []
+        if not root.left and not root.right:
+            return [root.val]
+        left_boundary(root.left)
+        right_boundary(root.right)
         leaf_nodes(root)
         
         return ([root.val]+self.left+self.leaf+self.right)
+            
+                
+        
+        
             
         
                 
