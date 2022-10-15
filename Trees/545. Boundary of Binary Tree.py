@@ -104,6 +104,7 @@ class Solution:
         
         return ([root.val]+self.left+self.leaf+self.right)
             
+        
                 
         
         
