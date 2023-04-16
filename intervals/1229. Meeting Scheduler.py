@@ -65,3 +65,21 @@ class Solution:
                 else:
                     j += 1
         return []
+    
+    def minAvailableDuration(self, slots1: List[List[int]], slots2: List[List[int]], d: int) -> List[int]:
+        
+        j = 0
+        s = slots1+slots2
+        s.sort()
+        print(s)
+        p_s, p_e = None,None
+        for i in s:
+            if p_e and p_s <= i[0] < p_e:
+                start = max(p_s, i[0])
+                end = min(p_e, i[1])
+                if end - start >= d:
+                    return [start, start+d]
+                p_s, p_e = start, max(p_e, i[1])
+            else:
+                p_s, p_e = i[0], i[1]
+        return []
